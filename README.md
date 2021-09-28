@@ -27,14 +27,8 @@ Create new user
 }
 ```
 
-## TODO
-There will be messenger bundle to autoconfigure the library and provide CLI commands.
-Microservices will not need to require enqueue dependencies and the only dependency needed will be
-domain and messenger libraries.
-
-`ProducerInterface` will also contain `sendEvent(EventInterface $event): void` method.
-
-## Dispatching commands
+## Commands
+### Dispatching command
 ```php
 private ProducerInterface $producer;
 
@@ -43,15 +37,44 @@ public function __construct(ProducerInterface $producer)
     $this->producer = $producer;
 }
 
-public function createUser(CreateUser $command): Response
+public function createUser(CreateUserDto $input): Response
 {
-    $this->producer->sendCommand($command); // fire and forget (don't wait for the response)
+    $this->producer->sendCommand($input->toCommand()); // fire and forget (don't wait for the response)
     
     return new Response(null, RESPONSE::HTTP_NO_CONTENT);
 }
 ```
 
+### Handling
+```php
+final class CreateUserHandler implements CommandHandlerInterface
+{
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /** @param CreateUser $command */
+    public function __invoke(CommandInterface $command): void
+    {
+        $user = new User($command->id(), $command->username());
+        
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+
+    public static function getCommandName(): string
+    {
+        return CreateUser::class;
+    }
+}
+```
+
 ## Querying
+### Dispatching query
+
 ```php
 private ProducerInterface $producer;
 
@@ -72,3 +95,42 @@ public function getUser(string $id): Response
     return new JsonResponse($replyMessage->getBody(), Response::HTTP_OK, [], true);
 }
 ```
+
+### Handling
+```php
+class GetUserQueryHandler implements QueryHandlerInterface
+{
+    private UserRepositoryInterface $repository;
+    private SerializerInterface $serializer;
+
+    public function __construct(UserRepositoryInterface $repository, SerializerInterface $serializer)
+    {
+        $this->repository = $repository;
+        $this->serializer = $serializer;
+    }
+
+    /** @param GetUserQuery $query */
+    public function __invoke(QueryInterface $query): QueryResponseInterface
+    {
+        $user = $this->repository->find($query->userId());
+
+        if ($user === null) {
+            return ErrorQueryResponse::fromException(new ResourceNotFoundException("User {$query->userId()} not found"));
+        }
+
+        return new QueryResponse($this->serializer->serialize($user, 'json'));
+    }
+
+    public static function getQueryName(): string
+    {
+        return GetUserQuery::class;
+    }
+}
+```
+
+## TODO
+There will be messenger bundle to autoconfigure the library and provide CLI commands.
+Microservices will not need to require enqueue dependencies and the only dependency needed will be
+domain and messenger libraries.
+
+`ProducerInterface` will also contain `sendEvent(EventInterface $event): void` method.
