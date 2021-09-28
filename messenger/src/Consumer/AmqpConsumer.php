@@ -7,7 +7,6 @@ use Enqueue\AmqpExt\AmqpContext;
 use Enqueue\Consumption\ChainExtension;
 use Enqueue\Consumption\Extension\LogExtension;
 use Enqueue\Consumption\Extension\ReplyExtension;
-use Enqueue\Consumption\Extension\SignalExtension;
 use Enqueue\Consumption\ExtensionInterface;
 use Enqueue\Consumption\QueueConsumer;
 use Interop\Amqp\Impl\AmqpQueue;

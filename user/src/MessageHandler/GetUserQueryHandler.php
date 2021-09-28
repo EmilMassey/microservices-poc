@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Emil\Domain\Exception\ResourceNotFoundException;
 use Emil\Domain\Message\GetAddressQuery;
 use Emil\Domain\Message\GetUserQuery;
-use Emil\Domain\Message\GetUsersQuery;
 use Emil\Domain\Message\QueryInterface;
 use Emil\Domain\Model\Address;
 use Emil\Domain\Model\User;
@@ -15,7 +14,6 @@ use Emil\Messenger\Consumer\QueryHandlerInterface;
 use Emil\Messenger\Consumer\QueryResponse;
 use Emil\Messenger\Consumer\QueryResponseInterface;
 use Emil\Messenger\Producer\ProducerInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class GetUserQueryHandler implements QueryHandlerInterface

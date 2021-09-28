@@ -2,7 +2,6 @@
 
 namespace Emil\Messenger\Consumer;
 
-use Emil\Domain\Message\CommandInterface;
 use Emil\Domain\Message\QueryInterface;
 use Enqueue\Consumption\Result;
 use Interop\Queue\Context;

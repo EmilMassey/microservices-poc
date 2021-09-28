@@ -2,7 +2,6 @@
 
 namespace Emil\Messenger\Consumer;
 
-use Emil\Domain\Message\CommandInterface;
 use Emil\Domain\Message\QueryInterface;
 
 interface QueryHandlerInterface
