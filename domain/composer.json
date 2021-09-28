@@ -1,0 +1,20 @@
+{
+    "name": "emil/domain",
+    "description": "Domain Model",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Emil\\Domain\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Emil Masiakowski",
+            "email": "emil.masiakowski@platformazakupowa.pl"
+        }
+    ],
+    "require": {
+        "webmozart/assert": "^1.10"
+    }
+}

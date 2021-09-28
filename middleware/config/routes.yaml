@@ -1,0 +1,13 @@
+index:
+    path: /users
+    controller: App\Controller\UserController::index
+    methods: [GET]
+
+get_one:
+    path: /users/{id}
+    controller: App\Controller\UserController::getOne
+
+create:
+    path: /users
+    controller: App\Controller\UserController::create
+    methods: [POST]

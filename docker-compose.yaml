@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  address-php:
+    image: opennexus/php-fpm
+    volumes:
+      - ./address:/srv/app
+      - ./domain:/srv/domain
+      - ./messenger:/srv/messenger
+
+  middleware-php:
+    image: opennexus/php-fpm
+    volumes:
+      - ./middleware:/srv/app
+      - ./domain:/srv/domain
+      - ./messenger:/srv/messenger
+
+  middleware-nginx:
+    build: middleware/docker/nginx
+    volumes:
+      - ./middleware:/srv/app
+    ports:
+      - 8080:80
+
+  user-php:
+    image: opennexus/php-fpm
+    volumes:
+      - ./user:/srv/app
+      - ./domain:/srv/domain
+      - ./messenger:/srv/messenger
