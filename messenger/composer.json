@@ -7,7 +7,8 @@
         "emil/domain": "dev-master",
         "symfony/serializer": "^5.3",
         "symfony/property-access": "^5.3",
-        "enqueue/enqueue": "^0.10.9"
+        "enqueue/enqueue": "^0.10.9",
+        "symfony/framework-bundle": "^5.3"
     },
     "repositories": [
         {
@@ -18,7 +19,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Emil\\Messenger\\": "src/"
+            "Emil\\Messenger\\": "src/",
+            "Emil\\MessengerBundle\\": "src/Symfony/"
         }
     },
     "authors": [

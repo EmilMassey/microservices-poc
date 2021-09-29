@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dd711302714ed5cc9b8c46f53e28e7f",
+    "content-hash": "c07bece968f27dcd7183ad778c72fcaf",
     "packages": [
         {
             "name": "brick/math",
@@ -1536,19 +1536,21 @@
             "dist": {
                 "type": "path",
                 "url": "../messenger",
-                "reference": "9d61908e05947051bed7c5b3b0706ce2b1736235"
+                "reference": "964177761bbe9c248ca0975cb26e7cf62ce569f8"
             },
             "require": {
                 "emil/domain": "dev-master",
                 "enqueue/amqp-ext": "^0.10.9",
                 "enqueue/enqueue": "^0.10.9",
+                "symfony/framework-bundle": "^5.3",
                 "symfony/property-access": "^5.3",
                 "symfony/serializer": "^5.3"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Emil\\Messenger\\": "src/"
+                    "Emil\\Messenger\\": "src/",
+                    "Emil\\MessengerBundle\\": "src/Symfony/"
                 }
             },
             "license": [

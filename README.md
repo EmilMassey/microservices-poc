@@ -7,8 +7,8 @@ composer install --ignore-platform-reqs
 docker-compose up -d
 
 # run consumers (-vvv to enable very verbose mode)
-docker-compose exec address-php app:consume -vvv
-docker-compose exec user-php app:consume -vvv
+docker-compose exec address-php emil:messenger:consume -vvv
+docker-compose exec user-php mil:messenger:consume -vvv
 ```
 
 ## Requests
@@ -129,8 +129,5 @@ class GetUserQueryHandler implements QueryHandlerInterface
 ```
 
 ## TODO
-There will be messenger bundle to autoconfigure the library and provide CLI commands.
-Microservices will not need to require enqueue dependencies and the only dependency needed will be
-domain and messenger libraries.
 
 `ProducerInterface` will also contain `sendEvent(EventInterface $event): void` method.

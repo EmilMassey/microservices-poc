@@ -11,6 +11,13 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    _instanceof:
+        Emil\Messenger\Consumer\CommandHandlerInterface:
+            tags: [ 'emil.messenger.command_handler' ]
+
+        Emil\Messenger\Consumer\QueryHandlerInterface:
+            tags: [ 'emil.messenger.query_handler' ]
+
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:

@@ -1,0 +1,6 @@
+services:
+  emil.messenger.cli.consume_command:
+    class: Emil\MessengerBundle\Cli\ConsumeCommand
+    arguments: [ '%env(ENQUEUE_DSN)%' ]
+    tags:
+      - { name: 'console.command' }
